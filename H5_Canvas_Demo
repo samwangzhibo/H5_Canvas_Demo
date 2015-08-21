@@ -1,0 +1,55 @@
+<html>
+<head>
+<style>
+/**CSS源代码*/
+body{
+  font-family:'microsft yahei',Arial,sans-serif;
+}
+h1,h2{
+  font-size:18px;
+  font-weight:normal;
+}
+span{
+  font-size:14px;
+}
+canvas{
+  background:#222;
+}
+</style>
+</head>
+<body>
+<h1>屌丝追女神<span>(使用A,S,D,W键移动灰色接近红衣女神)</span></h1>
+<h2><small>看看十秒内能追到多少女神，;)</small>
+<script>
+var canvas = document.createElement("cavas");
+var ctx = canvas.getContext("2d");
+canvas.height = 340;
+canvas.height = 340;
+document.body.appendChild("canvas");
+
+var bg.Ready = false;
+var bgImage = new Image();
+bgImage.onload = function(){
+bgReady = true;
+}
+bgImage.src = "http://www.gbtags.com/gb/laitu/340x340&text=game zone/555555/222222";
+
+var ds = {
+  speed:5
+};
+ds.x = canvas.width/2;
+ds.y = canvas.height/2;
+
+var ns = {};
+var nsCaught = 0;
+
+var keysDown = {};
+
+addEventListener("keydown",function(e){
+  keysDown[e.keyCode] = true;
+},false);
+
+addEventListener("keyup",function(e){
+  delete.keysDown[e.keyCode];
+},false);
+
