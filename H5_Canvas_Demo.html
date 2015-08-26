@@ -1,141 +1,166 @@
-<html>
-<head>
+<html lang="zh"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>最终开发完成的游戏：屌丝追女神 </title>
+<meta charset="UTF-8">
 <style>
-/**CSS源代码*/
+/*CSS源代码*/
 body{
-  font-family:'microsft yahei',Arial,sans-serif;
+  font-family: 'microsoft yahei',Arial,sans-serif;
 }
+
 h1,h2{
   font-size:18px;
-  font-weight:normal;
+  font-weight: normal; 
 }
+
+h2{
+  color: #999;
+}
+
 span{
   font-size:14px;
 }
+
 canvas{
-  background:#222;
+ background:#222;
 }
+
 </style>
 </head>
 <body>
-<h1>屌丝追女神<span>(使用A,S,D,W键移动灰色接近红衣女神)</span></h1>
-<h2><small>看看十秒内能追到多少女神，;)</small>
+<h1>屌丝追女神 <span>（使用A，S，D，W键移动灰色屌丝接近红衣女神）</span></h1>
+<h2><small>看看十秒内能追到多少女神，:)</small></h2>
 <script>
-var canvas = document.createElement("cavas");
+var canvas = document.createElement("canvas");
 var ctx = canvas.getContext("2d");
-canvas.height = 340;
-canvas.height = 340;
-document.body.appendChild("canvas");
+canvas.width = 340;
+canvas.height = 340;   //加载画布
+document.body.appendChild(canvas);
 
-var bg.Ready = false;
+var bgReady = false;
 var bgImage = new Image();
-bgImage.onload = function(){
-bgReady = true;
-}
+bgImage.onload = function () {
+	bgReady = true;//背景是否加载完毕
+};
 bgImage.src = "http://www.gbtags.com/gb/laitu/340x340&text=game zone/555555/222222";
+//设置图片背景
 
 var ds = {
-  speed:5
+  speed: 5
 };
-ds.x = canvas.width/2;
-ds.y = canvas.height/2;
-
+ds.x = canvas.width / 2;
+ds.y = canvas.height / 2;
+    
 var ns = {};
 var nsCaught = 0;
 
 var keysDown = {};
 
-addEventListener("keydown",function(e){
-  keysDown[e.keyCode] = true;
-},false);
+//添加按钮缓存
+addEventListener("keydown", function (e) {
+	keysDown[e.keyCode] = true;
+}, false);
 
-addEventListener("keyup",function(e){
-  delete.keysDown[e.keyCode];
-},false);
+addEventListener("keyup", function (e) {
+	delete keysDown[e.keyCode];
+}, false);
 
-var update = function(){
-  ns.x = 20+(Math.random()*(canvas.width - 40));
-  ns.y = 20+(Math.random()*(canvase.width - 40)); 
+//重置女神位置
+var reset = function () {
+	ns.x = 20 + (Math.random() * (canvas.width - 40));
+	ns.y = 20 + (Math.random() * (canvas.height - 40));
 };
 
-var update = function(){
-  if(87 in keysDown){
-    ds.y -= ds.speed;
-  }
-  if(83 in keyDown){
-  ds.y += ds.speed;
-  }
-  if(65 in keyDown){
-  ds.x +=ds.speed;
-  }
-  
-  //Are they touching
-  if(
-  ds.x <=(ns.x+30)
-  && ns.x <=(ds.x+30)
-  && ds.y <=(ns.y+30)
-  && ns.y <=(ds.y+30)
-  ){
-  ++nsCaught;
-  reset();
-  }
-}
+//根据键盘输入
+var update = function () {
+	if (87 in keysDown) { //  up
+		ds.y -= ds.speed;
+	}
+	if (83 in keysDown) { //  down
+		ds.y += ds.speed;
+	}
+	if (65 in keysDown) { //  left
+		ds.x -= ds.speed;
+	}
+	if (68 in keysDown) { //  right
+		ds.x += ds.speed;
+	}
 
-var render = function(){
-  if(bgReady){
-    cxt.drawImage(bgImage,0,0);
-  }
-  
-  drawCharactor(ns.x,ns.y,'eb281d','ffffff');
-  drawCharactor(ds.x,ds.y,'AAAAAA','ffffff');
-  
-  ctx.fillStyle = "rgb(250,250,250)";
-  ctx.font ="18px,microsoft yahei";
-  ctx.fillStyle = '#efb73e'; 
+	// Are they touching?
+	if (
+		ds.x <= (ns.x + 30)
+		&& ns.x <= (ds.x + 30)
+		&& ds.y <= (ns.y + 30)
+		&& ns.y <= (ds.y + 30)
+	) {
+		++nsCaught;
+		reset();
+	}
+};
+
+var render = function () {
+	if (bgReady) {
+		ctx.drawImage(bgImage, 0, 0);
+	}
+     
+    
+    drawCharactor(ns.x, ns.y, 'eb281d','ffffff');
+    drawCharactor(ds.x, ds.y,'AAAAAA', 'ffffff');
+
+	ctx.fillStyle = "rgb(250, 250, 250)";
+	ctx.font = "18px microsoft yahei";
+    ctx.fillStyle = '#efb73e'; 
 	ctx.textAlign = "left";
 	ctx.textBaseline = "top";
-	  if(endflag){
+	
+    
+    if(endflag){
       ctx.fillText("游戏结束：追上 " + nsCaught + " 位女神", 20, 20);  
     }else{
       ctx.fillText("倒计时(" + count + ")：已追 " + nsCaught + " 位女神", 20, 20);
     }
-	};
-	
-	var endflag = fasle,count =0;
-	var main = function(){
+};
+
+
+var endflag=false,count=10;
+var main = function () {
 	update();
-	render();
-	
-	if(!=endflag){
-	requestAnimationFrame(main);
-	}
-	var w = window;
-  requestAnimationFrame = w.requestAnimationFrame || w.webkitRequestAnimationFrame || w.msRequestAnimationFrame || w.mozRequestAnimationFrame;
-	
-	reset();
-	main();
-	countdown();
-	gameover();
-	
-	function gameover(){
-		setTimeout(function(){endflag=true;},10000);
-	}
-	function  countdown(){
-		var countinterval = setInterval(function(){count--;},1000);
-		if(count==0)
-		clearInterval(countinterval);
-	}
-	}
-	function drawCharactor(x,y,color,strokecolor)
-	{
-		ctx.fillStyle = "#" + color;
-		ctx.fillRect(x,y,30,30);
-		ctx.fill();
-		
-		ctx.strokeStyle="#"+ strokecolor;
-		ctx.strokeRect(x,y,30,30);
-	}
+	render();//绘制矩形
+
+    if(!endflag){
+	  requestAnimationFrame(main);
+    }
+};
+
+var w = window;
+requestAnimationFrame = w.requestAnimationFrame || w.webkitRequestAnimationFrame || w.msRequestAnimationFrame || w.mozRequestAnimationFrame;
+
+reset();
+main();
+countdown();
+gameover();
+
+function gameover(){
+  setTimeout(function(){endflag=true;}, 10000);
+}
+
+function countdown(){
+  var countinterval = setInterval(function(){count--;}, 1000);
+  if(count===0){
+    clearInterval(countinterval);
+  }
+}
+
+//绘制矩形的具体方法
+function drawCharactor(x,y,color,strokecolor)
+{
+  ctx.fillStyle = "#" + color;
+  ctx.fillRect(x, y, 30, 30);
+  ctx.fill();
+  
+  ctx.strokeStyle="#" + strokecolor;
+  ctx.strokeRect(x, y, 30, 30);
+}
+
 </script>
 </body>
 </html>
-
