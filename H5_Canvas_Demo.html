@@ -113,5 +113,29 @@ var render = function(){
   requestAnimationFrame = w.requestAnimationFrame || w.webkitRequestAnimationFrame || w.msRequestAnimationFrame || w.mozRequestAnimationFrame;
 	
 	reset();
+	main();
+	countdown();
+	gameover();
+	
+	function gameover(){
+		setTimeout(function(){endflag=true;},10000);
 	}
-}
+	function  countdown(){
+		var countinterval = setInterval(function(){count--;},1000);
+		if(count==0)
+		clearInterval(countinterval);
+	}
+	}
+	function drawCharactor(x,y,color,strokecolor)
+	{
+		ctx.fillStyle = "#" + color;
+		ctx.fillRect(x,y,30,30);
+		ctx.fill();
+		
+		ctx.strokeStyle="#"+ strokecolor;
+		ctx.strokeRect(x,y,30,30);
+	}
+</script>
+</body>
+</html>
+
