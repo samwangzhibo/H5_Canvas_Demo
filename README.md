@@ -6,4 +6,4 @@ A written H5 prick silk after the goddess game.（一款H5写的屌丝追女神�
 please Click it and download this HTML File.  
 [Download](https://github.com/samwangzhibo/H5_Canvas_Demo/blob/master/H5_Canvas_Demo.html)
 # enjoy it
-[点我去玩！](https://samwangzhibo.github.io/blogindex/H5_Canvas_Demo-master/H5_Canvas_Demo.html)
+[Click me to play！/点我去玩！](https://samwangzhibo.github.io/blogindex/H5_Canvas_Demo-master/H5_Canvas_Demo.html)
